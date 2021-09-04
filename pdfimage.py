@@ -56,7 +56,7 @@ app = Tk()
 app.title('PDF to Image Converter')
 
 # Label
-Label(app, text="File Location").grid(row=0, sticky=W, padx=10)
+Label(app, text="File Location").grid(row=0, sticky=W, padx=10, pady=30)
 
 
 
