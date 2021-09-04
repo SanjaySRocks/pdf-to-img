@@ -1,9 +1,15 @@
 from pdf2image import convert_from_path
 from tkinter import *
-from tkinter import messagebox
-from tkinter import ttk
+from tkinter import messagebox, ttk
+from tkinter import filedialog
+
 import os.path
 
+def browse():
+	global filename
+	filename = filedialog.askopenfilename(filetypes=(("pdf files","*.pdf"),("All files","*.*")))
+	text_box1.delete(0, "end")
+	text_box1.insert(0, filename)
 
 def pdf2img():
 	
@@ -39,7 +45,7 @@ def pdf2img():
 		messagebox.showinfo("Error", e)
 
 	else:
-		Result = "Success"
+		Result = f"Pdf Page Count: {len(images)} \nFile Converted Success"
 		messagebox.showinfo("Result", Result)
 
 
@@ -52,17 +58,23 @@ app.title('PDF to Image Converter')
 # Label
 Label(app, text="File Location").grid(row=0, sticky=W, padx=10)
 
+
+
 # Text Box
 text_box1 = Entry(app, width=40)
 text_box1.grid(row=0, column=1)
 
+btn_browse = ttk.Button(app, text="Browse file", command=browse)
+btn_browse.grid(row=0, column=2, padx=5, pady=5)
+
+
 # Convert Button
 btn_convert = ttk.Button(app, text="Convert", command=pdf2img)
-btn_convert.grid(row=0, column=2, padx=5, pady=5)
+btn_convert.grid(row=0, column=3, padx=5, pady=5)
 
 # App Exit Button
 btn_exit = ttk.Button(app, text="Exit", command=app.quit)
-btn_exit.grid(row=0, column=3, padx=5, pady=5)
+btn_exit.grid(row=0, column=4, padx=5, pady=5)
 
 # Run App
 app.mainloop()
